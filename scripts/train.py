@@ -8,7 +8,7 @@ from tensorflow.keras.callbacks import ReduceLROnPlateau,EarlyStopping
 import argparse
 import utils
 from GSGM import GSGM
-from deepsets_cond import DeepSetsAttClass
+#from deepsets_cond import DeepSetsAttClass
 from tensorflow.keras.callbacks import ModelCheckpoint
 import horovod.tensorflow.keras as hvd
 
@@ -23,10 +23,10 @@ if __name__ == "__main__":
 
 
     parser = argparse.ArgumentParser()    
-    parser.add_argument('--folder', default='/pscratch/sd/v/vmikuni/TOP/', help='Path containing the training files')
+    parser.add_argument('--folder', default='/global/cfs/cdirs/m3246/vmikuni/TOP/', help='Path containing the training files')
     parser.add_argument('--dataset', default='gluon', help='Which dataset to train')
     parser.add_argument("--batch", type=int, default=250, help="Batch size")
-    parser.add_argument("--epoch", type=int, default=150, help="Max epoch")
+    parser.add_argument("--epoch", type=int, default=100, help="Max epoch")
     parser.add_argument("--warm_epoch", type=int, default=10, help="Warm up epochs")
     parser.add_argument("--stop_epoch", type=int, default=30, help="Epochs before reducing lr")
     parser.add_argument("--lr", type=float, default=3e-5, help="learning rate")

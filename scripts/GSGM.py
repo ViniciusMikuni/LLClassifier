@@ -306,7 +306,8 @@ class GSGM(keras.Model):
                    const_shape=None,
                    jet=None,
                    mask=None,
-                   atol=1e-5,eps=1e-5):
+                   atol=1e-5,
+                   eps=1e-5):
 
         from scipy import integrate
 
@@ -329,8 +330,8 @@ class GSGM(keras.Model):
             return  f*x - 0.5*g2 * score_eval_wrapper(x, time_steps,jet,mask).numpy()
         
         res = integrate.solve_ivp(
-            ode_func, (1.0-1e-6, 1e-6), tf.reshape(init_x,[-1]).numpy(),
-            rtol=atol, atol=atol, method='RK45')  
+            ode_func, (1.0-eps, eps), tf.reshape(init_x,[-1]).numpy(),
+            rtol=atol, atol=atol, method='RK23')  
         print(f"Number of function evaluations: {res.nfev}")
         sample = tf.reshape(res.y[:, -1],shape)
         return sample, init_x
@@ -344,9 +345,9 @@ class GSGM(keras.Model):
                    jet=None,
                    mask=None,
                    atol=1e-5,
-                   rtol = 1e-3,
-                   eps=1e-5,
-                   exact = False,
+                   rtol =5e-4,
+                   eps = 1e-5,
+                   exact = True,
     ):
 
         from scipy import integrate

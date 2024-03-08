@@ -151,7 +151,7 @@ if __name__=='__main__':
 
     parser = OptionParser(usage="%prog [opt]  inputFiles")
     parser.add_option("--dataset", type="string", default="gluon", help="Dataset to load")
-    parser.add_option("--folder", type="string", default="/pscratch/sd/v/vmikuni/TOP/", help="Folder containing input files")
+    parser.add_option("--folder", type="string", default="/global/cfs/cdirs/m3246/vmikuni/TOP/", help="Folder containing input files")
     
     #Model parameters    
     parser.add_option('--sample', action='store_true', default=False,help='Sample from trained model')
@@ -169,7 +169,7 @@ if __name__=='__main__':
         likelihood_data(flags,sample_name)
     else:        
         jets_gen, particles_gen = get_generated_particles(sample_name)
-        print("Loading {} Generated Events".format(jets_gen.shape[0]))
+        print("Loading {} Generated Events with up to {} particles".format(jets_gen.shape[0], particles_gen.shape[1]))
         test = utils.DataLoader(os.path.join(flags.folder, '{}_val.h5'.format(flags.dataset)))    
         particles, jets = get_from_file(test)
                 
@@ -192,7 +192,7 @@ if __name__=='__main__':
         
         jets_init,part_init = get_gaussians(sample_name)
         jets_end,part_end = get_gaussians(sample_name.replace('.h5','_ll.h5'))
-        
+        print(jets_init-jets_end)
         plot(jets_init,jets_end,title='normal_jet_{}'.format(flags.dataset),nplots=2,
              var_names=['Jet Gaussian 1','Jet Gaussian 2'],
              plot_folder=flags.plot_folder,sample=flags.dataset)

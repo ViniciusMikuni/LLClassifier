@@ -57,7 +57,7 @@ def clustering_sum(data,folder,sample='train',nevents=1000,nparts=100):
 
 if __name__=='__main__':
     parser = OptionParser(usage="%prog [opt]  inputFiles")
-    parser.add_option("--npoints", type=int, default=50, help="Number of particles per event")
+    parser.add_option("--npoints", type=int, default=100, help="Number of particles per event")
     parser.add_option("--folder", type="string", default='/global/cfs/cdirs/m3929/TOP/', help="Folder containing input files")
     parser.add_option("--sample", type="string", default='train.h5', help="Input file name")
 
